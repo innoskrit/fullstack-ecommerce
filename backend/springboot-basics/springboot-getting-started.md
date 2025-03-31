@@ -14,6 +14,8 @@
     * Lets use Java 17 as that is still the most stable version, its ok to use Java 21 as well though
 
 ## Import project into intellij
+- Make sure to select the right JDK in intellij
+    * File > Project Structure > SDK
 
 ## Create hello world GET API
 * Springboot annotations
