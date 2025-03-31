@@ -34,7 +34,8 @@ Download OpenJDK 22
 
 ## Database Tool
 - There are plenty of tools, even command line mysql works great
-- Those who prefer a UI can download [dbeaver](https://dbeaver.io/)
+- Those who prefer a UI can download [Beekeeper studio](https://www.beekeeperstudio.io/download)
+- Other popular options: DBeaver, MySqlWorkbench
 
 ## Github
 - Setup ssh key in order to efficiently work with github
