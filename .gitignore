@@ -1,0 +1,56 @@
+# Java class files
+*.class
+
+# Logs
+*.log
+
+# Gradle build output
+/build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# IntelliJ / VSCode / Eclipse
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.project
+.classpath
+.settings/
+
+# Gradle-specific
+.gradle/
+**/.gradle/
+gradle-app.setting
+
+# Local environment
+.env
+*.env
+*.local
+*.secret
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test reports
+/test-results/
+/test-output/
+/out/
+
+# Kotlin-specific
+*.kjsm
+
+# Coverage and analysis
+jacoco.exec
+/reports/
+/coverage/
+
+# Generated files
+/build/
+generated/
+
+# User config files
+*.swp
+*.bak
+*~
