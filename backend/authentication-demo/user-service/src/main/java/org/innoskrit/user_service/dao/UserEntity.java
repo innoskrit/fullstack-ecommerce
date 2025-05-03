@@ -9,12 +9,14 @@ import java.util.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class UserEntity {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) // Ensures DB auto-generates ID
     private Long id;
 
     private String username;
+    private String email;
     private String password;
 
     @ElementCollection(fetch = FetchType.EAGER)
