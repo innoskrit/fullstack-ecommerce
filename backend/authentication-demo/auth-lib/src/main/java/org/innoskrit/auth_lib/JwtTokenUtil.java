@@ -8,15 +8,16 @@ import java.security.Key;
 
 public class JwtTokenUtil {
 
-    private static final String SECRET_KEY = "YourSecretKeyMustBeAtLeast256BitsLongSoUseThisExampleKey!";
+    // TODO: load from config
+    private static final String SECRET_KEY = "uXZ4+XfYlZxzzmlEAWrBvuA2+gUAVrMj2t3GytRUxkz7CpxRpb0K9FXUB7lQ8eO8JgR2GZzNBiX2UJH+W4YXYA==";
 
     private static final long EXPIRATION_TIME = 1000 * 60 * 60; // 1 hour
 
     private static final Key KEY = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
 
-    public String generateToken(String username, List<String> roles) {
+    public String generateToken(Long userId, List<String> roles) {
         return Jwts.builder()
-                .setSubject(username)
+                .setSubject(userId.toString())
                 .claim("roles", roles)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
@@ -24,27 +25,13 @@ public class JwtTokenUtil {
                 .compact();
     }
 
-    public boolean validateToken(String token, String username) {
-        final String extractedUsername = extractUsername(token);
-        return (extractedUsername.equals(username) && !isTokenExpired(token));
-    }
-
     public List<String> extractRoles(String token) {
         Claims claims = extractAllClaims(token);
         return claims.get("roles", List.class);
     }
 
-    public String extractUsername(String token) {
-        return extractClaim(token, Claims::getSubject);
-    }
-
-    private Date extractExpiration(String token) {
-        return extractClaim(token, Claims::getExpiration);
-    }
-
-    private <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
-        final Claims claims = extractAllClaims(token);
-        return claimsResolver.apply(claims);
+    public Long extractUserId(String token) {
+        return Long.parseLong(extractClaim(token, Claims::getSubject));
     }
 
     public boolean isTokenExpired(String token) {
@@ -57,5 +44,14 @@ public class JwtTokenUtil {
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
+    }
+
+    private Date extractExpiration(String token) {
+        return extractClaim(token, Claims::getExpiration);
+    }
+
+    private <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
+        final Claims claims = extractAllClaims(token);
+        return claimsResolver.apply(claims);
     }
 }

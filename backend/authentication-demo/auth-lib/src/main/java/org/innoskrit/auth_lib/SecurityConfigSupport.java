@@ -21,7 +21,7 @@ public abstract class SecurityConfigSupport {
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .addFilterBefore(new JwtRequestFilter(jwtTokenUtil()), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new JwtRequestFilter(jwtTokenUtil(), permittedPaths()), UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 }
